@@ -23,10 +23,12 @@ class StoreUser extends FormRequest
      */
     public function rules()
     {
+        $uuid = $this->user;
+
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'password' => ['required', 'min:4', 'max:14'],
-            'email' => ['required', 'max:255'],
+            'email' => ['required', 'max:255', "unique:users,email,{$uuid},uuid"],
             'device_name' => ['required', 'string', 'max:200']
         ];
     }
